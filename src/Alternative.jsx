@@ -1,3 +1,6 @@
+// This code works for the project. Same as the one in App.jsx,
+// but App.jsx has been refactored
+
 import { useState } from "react"
 import people from "./data"
 import { FaChevronLeft, FaChevronRight, FaQuoteRight } from "react-icons/fa"
@@ -5,17 +8,27 @@ import { FaChevronLeft, FaChevronRight, FaQuoteRight } from "react-icons/fa"
 function App() {
   const [index, setIndex] = useState(0)
   const { name, job, image, text } = people[index]
-
+  b
+  console.log(remainder)
+  const checkNumber = (number) => {
+    if (number > people.length - 1) {
+      return 0
+    }
+    if (number < 0) {
+      return people.length - 1
+    }
+    return number
+  }
   const nextPerson = () => {
-    setIndex((currentIndex) => {
-      const newIndex = (currentIndex + 1) % people.length
-      return newIndex
+    setIndex((index) => {
+      let newIndex = index + 1
+      return checkNumber(newIndex)
     })
   }
   const prevPerson = () => {
-    setIndex((currentIndex) => {
-      const newIndex = (currentIndex - 1 + people.length) % people.length
-      return newIndex
+    setIndex((index) => {
+      let newIndex = index - 1
+      return checkNumber(newIndex)
     })
   }
   const randomPerson = () => {
@@ -23,8 +36,7 @@ function App() {
     if (randomNumber === index) {
       randomNumber = index + 1
     }
-    const newIndex = randomNumber % people.length
-    setIndex(newIndex)
+    setIndex(checkNumber(randomNumber))
   }
   return (
     <>
